@@ -43,6 +43,8 @@ public:
 
     virtual int canParseHakerCode(Type arg1, Type arg2) = 0;
 
+    virtual Type canParseReference(const Type &arg) = 0;
+
     virtual void canSetConstParam(const Type* arg) = 0;
 
     virtual void voidMethod() = 0;
