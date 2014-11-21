@@ -1,0 +1,4 @@
+[submodule "tests/cxxtest"]
+	path = tests/cxxtest
+	url = https://github.com/CxxTest/cxxtest.git
+	branch = 4.4
