@@ -5,6 +5,7 @@ HEADERS   = TestCxxMocks.h TestGeneratedMocks.h
 FAIL_TESTSUITE = ./testsuite_fail
 FAIL_TESTS =  TestExpectations.h
 
+CXXTESTGEN = cxxtest/bin/cxxtestgen
 
 .PHONY:  all clean prebuild
 
@@ -15,7 +16,7 @@ prebuild: mocks.gen.h
 
 
 $(TESTSUITE).cpp: $(HEADERS)
-	python cxxtest/cxxtestgen.py --error-printer --have-eh  --have-std --abort-on-fail -o $@ $^
+	python $(CXXTESTGEN) --error-printer --have-eh  --have-std --abort-on-fail -o $@ $^
 	
 $(TESTSUITE): $(TESTSUITE).cpp
 	g++ -Wall -Werror -g -o $@ $^ -Icxxtest -I ../
@@ -26,7 +27,7 @@ $(FAIL_TESTSUITE): $(FAIL_TESTSUITE).cpp
 	-$(FAIL_TESTSUITE)
 
 $(FAIL_TESTSUITE).cpp: $(FAIL_TESTS)
-	python cxxtest/cxxtestgen.py --error-printer --have-eh  --have-std --abort-on-fail -o $@ $^
+	python $(CXXTESTGEN) --error-printer --have-eh  --have-std --abort-on-fail -o $@ $^
 
 
 mocks.gen.h: supportedInterface.h ISeveralArguments.h IForwardDeclaration.h
