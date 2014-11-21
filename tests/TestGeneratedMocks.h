@@ -3,15 +3,6 @@
 #include <cxxtest/TestSuite.h>
 #include "mocks.gen.h"
 
-namespace CxxTest {
-
-    inline bool equals(const Type& x, const Type& y)
-    {
-        return x == y;
-    }
-}
-
-
 class testGeneratedMocks : public CxxTest::TestSuite
 {
 public:
