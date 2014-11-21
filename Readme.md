@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kirillsud/cxxmock.svg?branch=master)](https://travis-ci.org/kirillsud/cxxmock)
+[![Build Status](https://travis-ci.org/comm644/cxxmock.svg?branch=master)](https://travis-ci.org/comm644/cxxmock)
 
 About 
 ==================================
