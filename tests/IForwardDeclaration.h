@@ -1,16 +1,16 @@
-class A;
-class B;
+class classA;
+class classB;
 
 
-namespace A {
-class A;
-class B;
+namespace Ans {
+class classA;
+class classB;
 }
 
 namespace A {
 namespace B {
- class A;
- class B;
+ class classA;
+ class classB;
 }}
 
 

@@ -4,7 +4,7 @@
 #include <sstream>
 #include <iostream>
 
-#include <cxxmock/CxxTestEquals.h>
+//#include <cxxmock/CxxTestEquals.h> //3.10.1
 #include <cxxmock/IArgument.h>
 
 #ifdef  QT_VERSION 

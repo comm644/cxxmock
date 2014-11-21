@@ -23,7 +23,7 @@ $(TESTSUITE): $(TESTSUITE).cpp
 
 $(FAIL_TESTSUITE): $(FAIL_TESTSUITE).cpp
 	g++ -Wall -Werror -g -o $@ $^ -Icxxtest -I ../
-	-$@
+	-$(FAIL_TESTSUITE)
 
 $(FAIL_TESTSUITE).cpp: $(FAIL_TESTS)
 	python cxxtest/cxxtestgen.py --error-printer --have-eh  --have-std --abort-on-fail -o $@ $^
