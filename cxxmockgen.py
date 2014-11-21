@@ -28,7 +28,7 @@ rxTypeBase = "\s*(?:const\s+)?(?:unsigned\s+)?[\w:]+\s*";
 rxType = "(" + rxTypeBase + "(?:<\s*(?:template|class)?" + rxTypeBase + ">)?[&*]?)\s+";
 
 rxName = "(\w+)\s*";
-rxArg = "(" + rxType + rxName + ")";
+rxArg = "(" + rxType + "&?" + rxName + ")";
 rxArgList = "([,]?" + rxArg +")*";
 rxMethod = re.compile("(virtual\s+("+rxType+ rxName +")\((.*)\)(\s*const)?)\s*=\s*0;");
 rxClassLine = 'class\s+(\w+)\s*{?';
