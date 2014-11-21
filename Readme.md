@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/comm644/cxxmock.svg?branch=master)](https://travis-ci.org/comm644/cxxmock)
+
 About 
 ==================================
 
@@ -52,4 +54,4 @@ mocks.verify();
 ~~~~~~~~~~~~~~~~~~~~~~
 
 
-[Examples]
+[Examples](docs/examples.md)
