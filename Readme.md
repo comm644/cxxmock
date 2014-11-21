@@ -1,3 +1,5 @@
+![status](https://travis-ci.org/comm644/cxxmock.svg?branch=master)
+
 About 
 ==================================
 
