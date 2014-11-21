@@ -54,4 +54,4 @@ mocks.verify();
 ~~~~~~~~~~~~~~~~~~~~~~
 
 
-[Examples]
+[Examples](docs/examples.md)
