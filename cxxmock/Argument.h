@@ -5,6 +5,10 @@
 #include <iostream>
 
 //#include <cxxmock/CxxTestEquals.h> //3.10.1
+#include <cxxtest/TestSuite.h> //4.4
+
+
+
 #include <cxxmock/IArgument.h>
 
 #ifdef  QT_VERSION 
@@ -58,7 +62,7 @@ public:
 	{
 		const Argument<T> *arg = dynamic_cast< const Argument<T>* >( &other );
 
-		return CxxTest::equals( Value, arg->Value);
+		return CxxTest::equals<T, T>::test( Value, arg->Value);
 	}
 };
 
