@@ -8,14 +8,14 @@
 #include <cxxmock/Exceptions.h>
 #include <cxxmock/IArgument.h>
 #include <cxxmock/Argument.h>
+#include <cxxmock/Action.h>
+
 
 
 namespace CxxMock
 {
-
-typedef IArgument* IArgumentPtr;
-typedef std::map<int, IArgumentPtr > ArgList;
 typedef std::map<std::string, ArgList>  ExpectedCall;  // funcname( args )
+
 
 class CallInfo;
 class MockObject;
@@ -46,20 +46,25 @@ public:
 	CallInfo& count( int count ) { _count = count; return *parent; }
 };
 
+
+
 class MockObject;
 class CallInfo
 {
 	friend class MockObject;
 
 private:
+
 	std::string _method;
 	bool        _ignoreArguments;
 	Repeat      _repeat;
+	IAction* _action;
 
 
 	CallInfo(const CallInfo&):
 		_ignoreArguments( false ),
-		_repeat(this),
+		_repeat(this), 
+		_action(NULL),
 		defaultResult(0),
 		Result(&defaultResult)
 	{
@@ -100,7 +105,8 @@ public:
 	CallInfo( std::string method ) :
 		_method(method),
 		_ignoreArguments( false ),
-		_repeat(this),
+		_repeat(this), 
+		_action(NULL),
 		defaultResult(0),
 		Result(&defaultResult)
 	{
@@ -180,6 +186,10 @@ public:
 
 			throw AssertArgumentException(ss.str());
 		}
+
+		if (_action != NULL ) {
+			_action->call( Result, actual.inValues );
+		}
 	}
 
 
@@ -194,6 +204,15 @@ public:
 	}
 
 
+
+	template< typename Sender, typename T>
+	CallInfo& action( Sender* sender, T method )
+	{
+	    _action = new Action<Sender, T>(sender, method );
+
+	    return *this;
+        }
+ 
 	void expectationFailed();
 
 };

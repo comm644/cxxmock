@@ -64,6 +64,21 @@ public:
 
 		return CxxTest::equals<T, T>::test( Value, arg->Value);
 	}
+
+	void setValue( const IArgument& other ) 
+	{
+		const Argument<T> *arg = dynamic_cast< const Argument<T>* >( &other );
+
+		Value = arg->Value;
+	}
+};
+
+typedef IArgument* IArgumentPtr;
+class ArgList : public std::map<int, IArgumentPtr >
+{
+public:
+	template<typename A>
+	A val(int idx ) const { return dynamic_cast<Argument<A>*>(find(idx)->second)->Value; }
 };
 
 

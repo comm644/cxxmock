@@ -163,6 +163,49 @@ public:
         //call method anywhere.
         mock->voidMethod();
     }
+
+    bool isCalled;
+    void customMethod()
+    {
+	isCalled= true;
+    }
+    int customMethod2(int a)
+    {
+	isCalled= true;
+	return 10;
+    }
+
+    void testCustomVoidAtion()
+    {
+        CxxMock::Repository mocks;
+
+        MyMocks::MyInterface* mock = mocks.create<MyMocks::MyInterface > ();
+        
+        TS_EXPECT_CALL_VOID( mock->voidMethod() ).action( this,  &TestMockObject::customMethod);
+
+        mocks.replay();
+        
+	isCalled = false;
+        //call method anywhere.
+        mock->voidMethod();
+	TS_ASSERT_EQUALS( true, this->isCalled );
+    }
+    void testCustomVoidAtionWithArgument()
+    {
+        CxxMock::Repository mocks;
+
+        MyMocks::MyInterface* mock = mocks.create<MyMocks::MyInterface > ();
+        
+        TS_EXPECT_CALL( mock->method( 5 ) ).action( this, &TestMockObject::customMethod2 );
+
+        mocks.replay();
+        
+	isCalled = false;
+        //call method anywhere.
+        TS_ASSERT_EQUALS( 10 , mock->method( 5 ) );
+	TS_ASSERT_EQUALS( true, this->isCalled );
+	
+    }
 };
 
 #endif // TESTMOCKOBJECT_H

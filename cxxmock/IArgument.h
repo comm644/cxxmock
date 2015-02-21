@@ -13,6 +13,7 @@ public:
 	virtual const std::string toString() const = 0;
 
 	virtual bool compare( const IArgument& other ) const = 0;
+	virtual void setValue( const IArgument& other ) = 0;
 	virtual ~IArgument(){}
 };
 
