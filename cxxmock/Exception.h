@@ -6,8 +6,8 @@ namespace CxxMock
 struct IException 
 {
 	virtual void throwException() = 0;
-	virtual ~IException();
-}
+	virtual ~IException(){};
+};
 
 template <typename T>
 class Exception : public IException

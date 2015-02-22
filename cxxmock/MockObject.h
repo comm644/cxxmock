@@ -60,6 +60,9 @@ private:
 		_actual[ info.method() ].push_back( &info );
 
 		CallInfo& expected = getExpected(info);
+
+		expected.throwException();
+
 		Argument<R> rc = expected.getResult<R>();
 		return rc.Value;
 	}

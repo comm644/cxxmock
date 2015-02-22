@@ -206,6 +206,29 @@ public:
 	TS_ASSERT_EQUALS( true, this->isCalled );
 	
     }
+    class myexception : public std::exception {};
+
+    void testThrowException()
+    {
+        CxxMock::Repository mocks;
+
+        MyMocks::MyInterface* mock = mocks.create<MyMocks::MyInterface > ();
+        
+        TS_EXPECT_CALL_VOID( mock->voidMethod() ).throws( myexception() );
+
+        mocks.replay();
+        
+	bool isThrown = false;
+	try {
+		//call method anywhere.
+		mock->voidMethod();
+	}
+	catch(  myexception& e ) {
+		isThrown = true;
+	}
+	TS_ASSERT_EQUALS( true, isThrown );
+	
+    }
 };
 
 #endif // TESTMOCKOBJECT_H

@@ -8,6 +8,7 @@
 #include <cxxmock/Exceptions.h>
 #include <cxxmock/IArgument.h>
 #include <cxxmock/Argument.h>
+#include <cxxmock/Exception.h>
 #include <cxxmock/Action.h>
 
 
@@ -59,12 +60,14 @@ private:
 	bool        _ignoreArguments;
 	Repeat      _repeat;
 	IAction* _action;
+	IException*  _exception;
 
 
 	CallInfo(const CallInfo&):
 		_ignoreArguments( false ),
 		_repeat(this), 
 		_action(NULL),
+		_exception(NULL),
 		defaultResult(0),
 		Result(&defaultResult)
 	{
@@ -95,6 +98,13 @@ private:
 		return *ptr;
 	}
 
+	void throwException()
+	{
+		if ( _exception  != NULL) {
+			_exception->throwException();
+		}
+	}
+
 public:
 	ArgList inValues;
 	ArgList outValues;
@@ -107,6 +117,7 @@ public:
 		_ignoreArguments( false ),
 		_repeat(this), 
 		_action(NULL),
+		_exception(NULL),
 		defaultResult(0),
 		Result(&defaultResult)
 	{
@@ -135,6 +146,13 @@ public:
 			delete Result;
 		}
 		Result = new Argument<R>(value);
+		return *this;
+	}
+
+	template<typename R>
+	CallInfo& throws(R value )
+	{
+		_exception = new Exception<R>(value);
 		return *this;
 	}
 
