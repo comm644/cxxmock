@@ -51,7 +51,7 @@ def main():
 def usage( problem = None ):
     '''Print usage info and exit'''
     if problem is None:
-        print usageString()
+        print(usageString())
         sys.exit(0)
     else:
         sys.stderr.write( usageString() )
@@ -73,7 +73,7 @@ def parseCommandline():
     try:
         options, patterns = getopt.getopt( sys.argv[1:], 'o:v',
                                            ['version', 'output=' ] )
-    except getopt.error, problem:
+    except getopt.error as problem:
         usage( problem )
         
     setOptions( options )
@@ -98,8 +98,7 @@ def printVersion():
 def setFiles( patterns ):
     '''Set input files specified on command line'''
     files = expandWildcards( patterns )
-    if len(files) is 0 :
-        usage( "No input files found" )
+    if len(files) == 0 : usage( "No input files found" )
     return files
 
 def expandWildcards( patterns ):
